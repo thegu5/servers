@@ -9,7 +9,7 @@ import time
 import math
 import os
 
-file_path = "Servers.json"
+file_path = "ips.txt"
 threads = 300
 secondsInBetween = 1
 
@@ -29,7 +29,7 @@ def run(start, stop):
     try:
       time.sleep(secondsInBetween)
 
-      ip = line.get("ip")
+      ip = line
       server = JavaServer(ip, 25565, timeout=5)
       status = server.status()
 
@@ -96,8 +96,7 @@ def run(start, stop):
   completelyDone += 1
 
 
-file1 = open(file_path, 'r', encoding="utf-8")
-lines = json.load(file1)
+lines = open(file_path, 'r', encoding="utf-8").readlines()
 print('Starting')
 print('Launching Threads')
 
@@ -143,8 +142,11 @@ while percentDone != 100:
 
 print('')
 print("Printing to file.")
-os.remove(file_path)
-MyWorkingFile = open(file_path, 'w', encoding="utf-8")
+# remove Servers.json if it exists
+if os.path.exists("Servers.json"):
+  os.remove("Servers.json")
+
+MyWorkingFile = open("Servers.json", 'w', encoding="utf-8")
 
 print(json.dumps(all_info), file=MyWorkingFile)
 
