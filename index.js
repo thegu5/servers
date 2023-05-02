@@ -20,6 +20,7 @@ const progress = () => {
     // format time passed
     process.stdout.write("%" + percent + " found " + found + " dead " + dead + " remaining " + remaining + "\r");
 }
+setInterval(progress, 5000); // slow but github actions cries if it's too fast
 let found = 0;
 let dead = 0;
 let remaining = ips.length;
@@ -32,13 +33,13 @@ const getServerStatus = async (ip) => {
         // console.log("len " + results.length)
         // console.log(ip + ": " + response)
         found++;
-        progress();
+        // progress();
         return true;
     })
     .catch((error) => {
         // console.log(ip + ": " + error)
         dead++;
-        progress();
+        // progress();
         return false;
         
     });
