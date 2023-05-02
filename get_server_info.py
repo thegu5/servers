@@ -7,8 +7,8 @@ import sys
 import time
 import math
 
-file_path_in = input("File with ips: ")
-file_path_out = input("Output File: ")
+file_path_in = "ips.txt"
+file_path_out = "Servers.json"
 # not_working_out = input("Not Working Ips Output File: ")
 threads = 200
 secondsInBetween = 1
@@ -54,9 +54,9 @@ def run(start, stop):
             except:
                 players = []
                 
-             try:
+            try:
                 currentPlayers = status.raw["players"]['online']
-             except:
+            except:
                 currentPlayers = 0
 
             all_info.append({"ip": ip, "version": version, "description": description, "max_players": maxPlayers,
@@ -94,12 +94,12 @@ for thread in range(threads):
     startingEndingNum += ipsPerThread
 
 time.sleep(2)
-call('clear' if os.name == 'posix' else 'cls')
+# call('clear' if os.name == 'posix' else 'cls')
 now = datetime.now()
 dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
 print("Date and Time Started: ", dt_string)
 while completelyDone != threads:
-  percentDone = float(borked + done) / len(lines) * 100
+  percentDone = float(borked + done) / len(Lines) * 100
   str = "{}% Complete, {} Threads Done, {} Working, {} Broken         ".format(
     round(percentDone, 2), completelyDone, done, borked)
   print(str, end="\r")
@@ -122,3 +122,4 @@ MyNotWorkingFile.close()
 """
 
 print("Done")
+
