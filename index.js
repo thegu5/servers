@@ -59,8 +59,12 @@ const getServerStatus = async (ip) => {
 async.eachLimit(ips, 500, getServerStatus)
 .then((res) => {
     fs.writeFileSync('data.json', JSON.stringify(results));
-    console.log("done!");
+    progress();
+    console.log();
+    console.log("done");
+    process.exit(0);
 })
 .catch((err) => {
     console.log(err)
+    process.exit(1);
 })
