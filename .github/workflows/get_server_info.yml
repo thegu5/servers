@@ -3,7 +3,7 @@ name: Get Server Info
 concurrency:
   group: "main"
   cancel-in-progress: false
-
+# just manual for now, going to run the action to see how long it takes (and figure out the right interval)
 on: workflow_dispatch
 
 jobs:
@@ -13,24 +13,17 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v2
-
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v2
+      - name: Set up node enviroment
+        uses: actions/setup-node@v3
         with:
-          python-version: '3.8'
-          architecture: 'x64'
-      - name: Install requirements
-        run: |
-          python3 -m pip install --upgrade pip 
-          python3 -m pip install -r requirements.txt
-      - name: Update README
-        run: |
-          python3 --version
-          python3 get_server_info.py 
-        env:
-          ACCESS_TOKEN: ${{secrets.ACCESS_TOKEN}}
-
-      - uses: stefanzweifel/git-auto-commit-action@v4
+          node-version: 18.16.0
+          cache: 'npm'
+      - name: Install deps
+        run: npm install
+      - name: Check servers
+        run: node index.js
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Get server Info
         

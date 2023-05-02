@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "async": "^3.2.4",
+    "minecraft-server-util": "^5.4.2"
+  }
+}
