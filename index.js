@@ -3,10 +3,26 @@ const fs = require('fs');
 const util = require('minecraft-server-util');
 const action = process.env.GITHUB_ACTIONS;
 let ips = fs.readFileSync('ips.txt').toString().split('\n');
+let outpath = 'data.json';
+if (process.argv.length > 0) {
+    if (process.argv[0] == '1') {
+        // remove the second half of the ips
+        ips = ips.slice(0, ips.length / 2);
+        outpath = 'tmp/data1.json';
+    }
+    if (process.argv[0] == '2') {
+        // remove the first half of the ips
+        ips = ips.slice(ips.length / 2, ips.length);
+        outpath = 'tmp/data2.json';
+    }
+    if (!fs.existsSync('tmp')) {
+        fs.mkdirSync('tmp');
+    }
+}
 let results = [];
 fs.writeFileSync('data.json', '[]')
 const saveData = async () => {
-    fs.writeFileSync('data.json', JSON.stringify(JSON.parse(fs.readFileSync('data.json')).concat(results)));
+    fs.writeFileSync(outpath, JSON.stringify(JSON.parse(fs.readFileSync('data.json')).concat(results)));
     results = [];
     data = null;
 }
