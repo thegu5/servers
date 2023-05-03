@@ -2,15 +2,15 @@ const async = require('async');
 const fs = require('fs');
 const util = require('minecraft-server-util');
 const action = process.env.GITHUB_ACTIONS;
-let ips = fs.readFileSync('ips.txt').toString().split('\n');
+var ips = fs.readFileSync('ips.txt').toString().split('\n');
 let outpath = 'data.json';
 if (process.argv.length > 0) {
-    if (process.argv[0] == '1') {
+    if (process.argv[2] == '1') {
         // remove the second half of the ips
         ips = ips.slice(0, ips.length / 2);
         outpath = 'tmp/data1.json';
     }
-    if (process.argv[0] == '2') {
+    if (process.argv[2] == '2') {
         // remove the first half of the ips
         ips = ips.slice(ips.length / 2, ips.length);
         outpath = 'tmp/data2.json';
@@ -19,6 +19,9 @@ if (process.argv.length > 0) {
         fs.mkdirSync('tmp');
     }
 }
+console.log(ips.length);
+console.log(process.argv[2]);
+console.log()
 let results = [];
 fs.writeFileSync('data.json', '[]')
 const saveData = async () => {
@@ -45,6 +48,7 @@ const getServerStatus = async (ip) => {
     return util.status(ip)
         .then((response) => {
             delete response.favicon;
+            response.ip = ip;
             results.push(response);
             if (results.length > 1000) {
                 saveData();
@@ -72,4 +76,4 @@ async.eachLimit(ips, 500, getServerStatus)
     .catch((err) => {
         console.log(err)
         process.exit(1);
-    })
+    });
