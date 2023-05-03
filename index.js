@@ -4,12 +4,13 @@ const util = require('minecraft-server-util');
 const action = process.env.GITHUB_ACTIONS;
 let ips = fs.readFileSync('ips.txt').toString().split('\n');
 let results = [];
-
-// async every 10 seconds, save results to data.json
+fs.writeFileSync('data.json', '[]')
 const saveData = async () => {
-    fs.writeFileSync('data.json', JSON.stringify(results));
+    fs.writeFileSync('data.json', JSON.stringify(JSON.parse(fs.readFileSync('data.json')).concat(results)));
+    results = [];
+    data = null;
 }
-if (!action) setInterval(saveData, 5000);
+// action ? setInterval(saveData, 60000) : setInterval(saveData, 5000);
 
 const progress = () => {
     // calculate percentage complete
@@ -18,7 +19,6 @@ const progress = () => {
     process.stdout.write("%" + percent + " found " + found + " dead " + dead + " remaining " + remaining + "\r");
 }
 action ? setInterval(progress, 5000) : setInterval(progress, 500);
-
 let found = 0;
 let dead = 0;
 let remaining = ips.length;
@@ -27,16 +27,19 @@ const getServerStatus = async (ip) => {
     remaining--;
     ip = ip.trim();
     return util.status(ip)
-    .then((response) => {
-        delete response.favicon;
-        results.push(response);
-        found++;
-        return true;
-    })
-    .catch((error) => {
-        dead++;
-        return false;
-    });
+        .then((response) => {
+            delete response.favicon;
+            results.push(response);
+            if (results.length > 1000) {
+                saveData();
+            }
+            found++;
+            return true;
+        })
+        .catch((error) => {
+            dead++;
+            return false;
+        });
 }
 
 async.eachLimit(ips, 500, getServerStatus)
@@ -44,7 +47,7 @@ async.eachLimit(ips, 500, getServerStatus)
         // const zlib = require('zlib');
         // const gzipData = zlib.gzipSync(JSON.stringify(results));
         // fs.writeFileSync('data.json.gz', gzipData);
-        fs.writeFileSync('data.json', JSON.stringify(results));
+        saveData();
         progress();
         console.log();
         console.log("done");
