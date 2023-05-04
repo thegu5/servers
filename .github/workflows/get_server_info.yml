@@ -3,8 +3,8 @@ name: Get Server Info
 concurrency:
   group: "main"
   cancel-in-progress: false
-# just manual for now, going to run the action to see how long it takes (and figure out the right interval)
-on: [workflow_dispatch]
+
+on: [workflow_dispatch, push]
 
 jobs:
   scan1:
