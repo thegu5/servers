@@ -26,8 +26,8 @@ jobs:
         run: node index.js 1
       - uses: actions/upload-artifact@v3
         with: 
-          name: scan1.json
-          path: tmp/scan1.json
+          name: data1.json
+          path: tmp/data1.json
   scan2:
     runs-on: ubuntu-latest
     permissions:
@@ -47,8 +47,8 @@ jobs:
         run: node index.js 2
       - uses: actions/upload-artifact@v3
         with: 
-          name: scan2.json
-          path: tmp/scan2.json
+          name: data2.json
+          path: tmp/data2.json
   cleanup:
     runs-on: ubuntu-latest
     needs: [scan1, scan2]
@@ -60,11 +60,11 @@ jobs:
           token: ${{ secrets.PAT }}
       - uses: actions/download-artifact@v3
         with:
-          name: scan1.json
+          name: data1.json
           path: tmp/
       - uses: actions/download-artifact@v3
         with:
-          name: scan2.json
+          name: data2.json
           path: tmp/
       - name: 'Echo download path'
         run: echo ${{steps.download.outputs.download-path}}
