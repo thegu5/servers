@@ -26,8 +26,6 @@ let results = [];
 fs.writeFileSync('data.json', '[]')
 const saveData = async () => {
     fs.writeFileSync(outpath, JSON.stringify(JSON.parse(fs.readFileSync('data.json')).concat(results)));
-    results = [];
-    data = null;
 }
 // action ? setInterval(saveData, 60000) : setInterval(saveData, 5000);
 
@@ -50,9 +48,6 @@ const getServerStatus = async (ip) => {
             delete response.favicon;
             response.ip = ip;
             results.push(response);
-            if (results.length > 1000) {
-                saveData();
-            }
             found++;
             return true;
         })
@@ -67,7 +62,7 @@ async.eachLimit(ips, 500, getServerStatus)
         // const zlib = require('zlib');
         // const gzipData = zlib.gzipSync(JSON.stringify(results));
         // fs.writeFileSync('data.json.gz', gzipData);
-        saveData();
+        fs.writeFileSync('data.json', JSON.stringify(results))
         progress();
         console.log();
         console.log("done");
