@@ -57,12 +57,12 @@ const getServerStatus = async (ip) => {
         });
 }
 
-async.eachLimit(ips, 500, getServerStatus)
+async.eachLimit(ips, 1000, getServerStatus)
     .then((res) => {
         // const zlib = require('zlib');
         // const gzipData = zlib.gzipSync(JSON.stringify(results));
         // fs.writeFileSync('data.json.gz', gzipData);
-        fs.writeFileSync('data.json', JSON.stringify(results))
+        fs.writeFileSync(outpath, JSON.stringify(results))
         progress();
         console.log();
         console.log("done");
