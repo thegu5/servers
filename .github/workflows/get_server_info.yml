@@ -84,8 +84,7 @@ jobs:
           git config user.name "Automated"
           git config user.email "actions@users.noreply.github.com"
           timestamp=$(date -u)
-          git config pull.rebase true
           git add -A
-          git commit -m "Latest data: ${timestamp}" --amend --no-edit || exit 0
+          git commit -m "Latest data: ${timestamp}"  || exit 0
           git pull
           git push
