@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>servers</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.3/dist/vapor/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&amp;display=swap">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        .fit-cover {
+            object-fit: cover;
+        }
+    </style>
+    <style>
+        .bs-icon {
+            --bs-icon-size: .75rem;
+            display: flex;
+            flex-shrink: 0;
+            justify-content: center;
+            align-items: center;
+            font-size: var(--bs-icon-size);
+            width: calc(var(--bs-icon-size) * 2);
+            height: calc(var(--bs-icon-size) * 2);
+            color: var(--bs-primary);
+        }
+
+        .bs-icon-xs {
+            --bs-icon-size: 1rem;
+            width: calc(var(--bs-icon-size) * 1.5);
+            height: calc(var(--bs-icon-size) * 1.5);
+        }
+
+        .bs-icon-sm {
+            --bs-icon-size: 1rem;
+        }
+
+        .bs-icon-md {
+            --bs-icon-size: 1.5rem;
+        }
+
+        .bs-icon-lg {
+            --bs-icon-size: 2rem;
+        }
+
+        .bs-icon-xl {
+            --bs-icon-size: 2.5rem;
+        }
+
+        .bs-icon.bs-icon-primary {
+            color: var(--bs-white);
+            background: var(--bs-primary);
+        }
+
+        .bs-icon.bs-icon-primary-light {
+            color: var(--bs-primary);
+            background: rgba(var(--bs-primary-rgb), .2);
+        }
+
+        .bs-icon.bs-icon-semi-white {
+            color: var(--bs-primary);
+            background: rgba(255, 255, 255, .5);
+        }
+
+        .bs-icon.bs-icon-rounded {
+            border-radius: .5rem;
+        }
+
+        .bs-icon.bs-icon-circle {
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container py-4 py-xl-5">
+        <div class="row gy-4 gy-md-0">
+            <div
+                class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
+                <div style="max-width: 350px;">
+                    <h2 class="text-uppercase fw-bold">MC Server Scanner</h2>
+                    <p class="my-3">A collection of <a href="https://wiki.vg/Server_List_Ping" target="_blank">server
+                            list ping</a> responses from tens of thousands of servers. Favicons removed to save storage.
+                    </p><button class="btn btn-primary btn-lg me-2" id="new" type="button"><i
+                            class="fas fa-redo"></i>&nbsp;New</button><a class="btn btn-outline-primary btn-lg"
+                        role="button" href="https://github.com/thegu5/servers/blob/main/data.json" target="_blank"><i
+                            class="fab fa-github"></i>&nbsp;Database</a>
+                </div>
+            </div>
+            <div class="col-md-6 overflow-scroll" style="max-height: 75vh; min-height: 75vh">
+                <pre><code id="json"> 
+                    loading...
+                </code></pre>
+            </div>
+        </div>
+    </div>
+    <hr class="">
+    <div class="container py-4 py-xl-5" data-aos="fade-left" data-aos-duration="1000">
+        <div class="row gy-4 row-cols-2 row-cols-md-4">
+            <div class="col">
+                <div class="text-center d-flex flex-column justify-content-center align-items-center py-3">
+                    <div
+                        class="bs-icon-xl bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                            viewBox="0 0 16 16" class="bi bi-hdd-rack">
+                            <path
+                                d="M4.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zM3 4.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm2 7a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm-2.5.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z">
+                            </path>
+                            <path
+                                d="M2 2a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h1v2H2a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2h-1V7h1a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2zm13 2v1a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm0 7v1a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm-3-4v2H4V7h8z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="px-3">
+                        <h2 class="fw-bold mb-0">180k</h2>
+                        <p class="mb-0">Server IPs</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="text-center d-flex flex-column justify-content-center align-items-center py-3">
+                    <div
+                        class="bs-icon-xl bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                            viewBox="0 0 16 16" class="bi bi-hdd-network">
+                            <path d="M4.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zM3 4.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"></path>
+                            <path
+                                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8.5v3a1.5 1.5 0 0 1 1.5 1.5h5.5a.5.5 0 0 1 0 1H10A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5H.5a.5.5 0 0 1 0-1H6A1.5 1.5 0 0 1 7.5 10V7H2a2 2 0 0 1-2-2V4zm1 0v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1zm6 7.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="px-3">
+                        <h2 class="fw-bold mb-0">30k+</h2>
+                        <p class="mb-0">Online servers</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="text-center d-flex flex-column justify-content-center align-items-center py-3">
+                    <div
+                        class="bs-icon-xl bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon">
+                        <i class="far fa-clock"></i>
+                    </div>
+                    <div class="px-3">
+                        <h2 class="fw-bold mb-0">6m</h2>
+                        <p class="mb-0">Update time</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="text-center d-flex flex-column justify-content-center align-items-center py-3">
+                    <div
+                        class="bs-icon-xl bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon">
+                        <i class="far fa-laugh-wink"></i>
+                    </div>
+                    <div class="px-3">
+                        <h2 class="fw-bold mb-0">Not a mess</h2>
+                        <p class="mb-0">don't look at the code</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <style>
+        /* rubberBand animation */
+        @keyframes rubberBand {
+            0% {
+                transform: scale3d(1, 1, 1);
+            }
+
+            30% {
+                transform: scale3d(1.25, 0.75, 1);
+            }
+
+            40% {
+                transform: scale3d(0.75, 1.25, 1);
+            }
+
+            50% {
+                transform: scale3d(1.15, 0.85, 1);
+            }
+
+            65% {
+                transform: scale3d(.95, 1.05, 1);
+            }
+
+            75% {
+                transform: scale3d(1.05, .95, 1);
+            }
+
+            100% {
+                transform: scale3d(1, 1, 1);
+            }
+        }
+    </style>
+    <script>
+
+        if (window.innerWidth < 768) {
+            [].slice.call(document.querySelectorAll('[data-bss-disabled-mobile]')).forEach(function (elem) {
+                elem.classList.remove('animated');
+                elem.removeAttribute('data-bss-hover-animate');
+                elem.removeAttribute('data-aos');
+                elem.removeAttribute('data-bss-parallax-bg');
+                elem.removeAttribute('data-bss-scroll-zoom');
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            if ('AOS' in window) {
+                AOS.init();
+            }
+        }, false);
+    </script>
+    <script>
+        const SERVERS_URL = 'https://raw.githubusercontent.com/thegu5/servers/main/data.json';
+        var data = []
+        function getServerJSON() {
+            fetch(SERVERS_URL)
+                .then(response => response.json())
+                .then(json => {
+                    data = json;
+                    renderServer(rand());
+                });
+        }
+        function rand() {
+            return data[Math.floor(Math.random() * data.length)]
+        }
+        function renderServer(json) {
+            document.getElementById('json').innerHTML = JSON.stringify(json, null, 2);
+            // animate #json with a rubber band effect
+            document.getElementById('json').style.animation = 'rubberBand 1s';
+            setTimeout(function () {
+                document.getElementById('json').style.animation = '';
+            }, 1000);
+        }
+        getServerJSON();
+        setInterval(getServerJSON, 300000);
+        // on button #new click
+        document.getElementById('new').addEventListener('click', function () {
+            renderServer(rand());
+        });
+    </script>
+</body>
+
+</html>
